@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Basic-H3+S3">
-        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/Basic-H3+S3/build/classes"/>
-        <property name="context-root" value="Basic-H3+S3"/>
-    </wb-module>
+	<wb-module deploy-name="MasonCode">
+		<property name="context-root" value="MasonCode"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src"/>
+		<wb-resource deploy-path="/" source-path="WebContent"/>
+	</wb-module>
 </project-modules>
