@@ -23,8 +23,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         <property name="dataSource" ref="dataSource"/> 
         <property name="mappingResources"> 
             <list> 
-                <value>Test/Orders/model/orders.hbm.xml</value> 
-                <value>Test/Products/model/products.hbm.xml</value> 
+                <value>com/orders/model/orders.hbm.xml</value> 
+                <value>com/products/model/products.hbm.xml</value> 
             </list> 
         </property> 
         <property name="hibernateProperties"> 
@@ -42,11 +42,11 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         <property name="sessionFactory" ref="sessionFactory"/> 
     </bean>    
          
-    <bean id="ordDAO" class="Test.Orders.model.OrdersHibernateDAO">
+    <bean id="ordDAO" class="com.orders.model.OrdersHibernateDAO">
         <property name="hibernateTemplate" ref="hibernateTemplate"/> 
     </bean>
 
-    <bean id="prodDAO" class="Test.Products.model.ProductsHibernateDAO">
+    <bean id="prodDAO" class="com.products.model.ProductsHibernateDAO">
         <property name="hibernateTemplate" ref="hibernateTemplate"/> 
     </bean>
 
@@ -57,22 +57,22 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
         <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="read_Orders" read-only="true" />
-            <tx:method name="delete_Orders" propagation="REQUIRED"/>
-            <tx:method name="read_Products" read-only="true" />
-            <tx:method name="create_Products" propagation="REQUIRED"/>
-            <tx:method name="update_Products" propagation="REQUIRED"/>
-            <tx:method name="delete_Products" propagation="REQUIRED"/>
+            <tx:method name="readOrders" read-only="true" />
+            <tx:method name="deleteOrders" propagation="REQUIRED"/>
+            <tx:method name="readProducts" read-only="true" />
+            <tx:method name="createProducts" propagation="REQUIRED"/>
+            <tx:method name="updateProducts" propagation="REQUIRED"/>
+            <tx:method name="deleteProducts" propagation="REQUIRED"/>
        </tx:attributes>
     </tx:advice>
   
     <aop:config>
-        <aop:pointcut id="ordDAOPointcut" expression="execution(* Test.Orders.model.OrdersDAO_interface.*(..))"/>
+        <aop:pointcut id="ordDAOPointcut" expression="execution(* com.orders.model.OrdersDAOInterface.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="ordDAOPointcut"/>
     </aop:config>
     
     <aop:config>
-        <aop:pointcut id="prodDAOPointcut" expression="execution(* Test.Products.model.ProductsDAO_interface.*(..))"/>
+        <aop:pointcut id="prodDAOPointcut" expression="execution(* com.products.model.ProductsDAOInterface.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="prodDAOPointcut"/>
     </aop:config>
 </beans>

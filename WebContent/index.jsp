@@ -8,7 +8,8 @@
 <title>Oracle CRUD data</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/pages/_00_include/top.jsp" />
+<jsp:include page="/_00_include/top.jsp" />
 	<h1>hi</h1>	<!-- create, read, update and delete -->
+
 </body>
 </html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+<!-- 說明文件: https://docs.jboss.org/hibernate/orm/3.3/reference/en/html/example-mappings.html -->
+    <class name="com.orders.model.OrdersVO" table="ORDERS" >
+        
+        <id name="ordID" column="ORD_ID">
+            <generator class="sequence">
+                <param name="sequence">ORDERS_ORD_ID_seq</param>
+            </generator>
+        </id>
+        
+        <property name="ordTime" column="ORD_TIME" />
+        <property name="ordTotal" column="ORD_TOTAL" />
+        <property name="ordCount" column="ORD_COUNT" />
+        
+        <many-to-one name="productsVO" class="com.products.model.ProductsVO" lazy="false">
+            <column name="PROD_ID" />
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>
+

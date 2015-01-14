@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.products.model.ProductsVO" table="PRODUCTS"
+	dynamic-insert="true" dynamic-update="true" >
+
+		<id name="prodID" column="PROD_ID">
+			<generator class="sequence">
+                <param name="sequence">PRODUCTS_PROD_ID_seq</param>
+            </generator>
+		</id>
+
+		<property name="prodName" column="PROD_NAME" />
+		<property name="prodPrice" column="PROD_PRICE" />
+		<property name="prodStatus" column="PROD_STATUS" />
+		
+		<set name="ords" table="ORDERS" lazy="false" cascade="all"  inverse="true"  order-by="ORD_ID asc">			
+			<key>
+				<column name="PROD_ID" />
+			</key>
+			<one-to-many class="com.orders.model.OrdersVO" />
+		</set>
+
+	</class>
+</hibernate-mapping>
+

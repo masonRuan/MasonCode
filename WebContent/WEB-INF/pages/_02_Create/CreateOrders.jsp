@@ -27,9 +27,8 @@
 		<span>總金額：</span><span id="money">5000</span><span> 元整</span>
 		
 		<form name="Create_Orders"
-			action="<%=request.getContextPath()%>/CRUD.do" method="post">
+			action="<%=request.getContextPath()%>/createOrders.do" method="post">
 			<button type="submit">新增訂單</button>
-			<input type="hidden" name="action" value="Create_Orders" />
 			<input type="hidden" name="ord_Total"  />
 			<input type="hidden" name="ord_Count"  />
 			<input type="hidden" name="prod_ID"    />
@@ -40,8 +39,8 @@
 				value="${prodVO.prod_Price}" />
 		</c:forEach>
 	</c:if>
-	<c:if test="${not empty msgOK}">
-			<h1>${msgOK.CreateOK}</h1>
+	<c:if test="${not empty modelMap.CreateOK}">
+			<h1>${modelMap.CreateOK}</h1>
 	</c:if>
 </body>
 <script>
