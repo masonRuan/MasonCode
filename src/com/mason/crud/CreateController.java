@@ -56,13 +56,17 @@ public class CreateController {
 
 		/* 驗證商品資料是否符合企業邏輯 */
 		try {
+			
 			if (prodName.trim().length() == 0) {
 				mav.addObject("prodNameErr", "名稱不能為空");
 			}
+			
 			prodPriceInt = Integer.parseInt(prodPrice);
+			
 		} catch (NumberFormatException e) {
 			mav.addObject("prodPriceErr", "價格應為整數");
 		}
+		
 		if (mav.isEmpty()) {
 			ProductsService prodServ = new ProductsService();
 			prodServ.createProducts(prodName, prodPriceInt);

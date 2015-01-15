@@ -23,8 +23,6 @@ public class OrdersService {
 		dao =(OrdersDAOInterface) context.getBean("ordDAO");
 	}
 	
-	
-	
 	public List<OrdersVO> readOrders(){
 		return dao.readOrders();
 	}
