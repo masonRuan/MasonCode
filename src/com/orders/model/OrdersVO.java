@@ -1,12 +1,11 @@
 package com.orders.model;
 
 import java.sql.Timestamp;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.products.model.ProductsVO;
 
 public class OrdersVO {
+
 	private Integer ordID;
 	private Timestamp ordTime;
 	private Integer ordTotal;

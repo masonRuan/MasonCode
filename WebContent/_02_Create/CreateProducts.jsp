@@ -11,29 +11,31 @@
 	<jsp:include page="/_00_include/top.jsp" />
 	<form name="createProducts"
 		action="<%=request.getContextPath()%>/createProd.do" method="post">
-		名稱：<input type="text" name="prodName" placeholder="請輸入商品名稱" /> 價格：<input
-			type="text" name="prodPrice" placeholder="請輸入商品價格" />
+		名稱：<input type="text" name="prodName" placeholder="請輸入商品名稱" /> 
+		價格：<input type="text" name="prodPrice" placeholder="請輸入商品價格" />
 		<button type="submit" id="submitBtn">新增商品</button>
 	</form>
-	<c:if test="${not empty modelMap.CreateOK}">
+	<c:if test="${not empty CreateOK}">
 		<h1>
-			<Font color='red'>${modelMap.CreateOK}</Font>
+			<Font color='red'>${CreateOK}</Font>
 		</h1>
 	</c:if>
 	<table>
 		<tr>
-			<td><c:if test="${not empty modelMap.prod_NameErr}">
-					<h1>
-						<Font color='red'>${modelMap.prod_NameErr}</Font>
-					</h1>
-
-				</c:if></td>
-			<td style="width: 300px"><c:if
-					test="${not empty modelMap.prod_PriceErr}">
-					<h1 style="padding-left: 30pt">
-						<Font color='red'>${modelMap.prod_PriceErr} </Font>
-					</h1>
-				</c:if></td>
+			<td>
+			  <c:if test="${not empty prodNameErr}">
+				 <h1>
+					<Font color='red'>${prodNameErr}</Font>
+				 </h1>
+			  </c:if>
+			</td>
+			<td style="width: 300px">
+			  <c:if test="${not empty prodPriceErr}">
+				 <h1 style="padding-left: 30pt">
+					<Font color='red'>${prodPriceErr} </Font>
+				 </h1>
+			  </c:if>
+			</td>
 		</tr>
 	</table>
 </body>

@@ -2,10 +2,10 @@ package com.products.model;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import com.orders.model.OrdersVO;
 
 public class ProductsVO {
+	
 	private Integer prodID;
 	private String prodName;
 	private Integer prodPrice;

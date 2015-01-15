@@ -9,20 +9,21 @@
 </head>
 <body>
 <jsp:include page="/_00_include/top.jsp" />
-	<c:if test="${empty modelMap.prodVOList}">
-			<h1><Font color='red'>沒有商品資料</Font></h1>
+	<c:if test="${empty prodVOList}">
+		<h1><Font color='red'>沒有商品資料</Font></h1>
 	</c:if>
 
-	<c:if test="${not empty modelMap.prodVOList}">
+	<c:if test="${not empty prodVOList}">
 		<select id = "selectProd">
-			<c:forEach var="prodVO" items="${modelMap.prodVOList}">
+			<c:forEach var="prodVO" items="${prodVOList}">
 				<option value="${prodVO.prodID}">${prodVO.prodName}</option>
 			</c:forEach>
 		</select>
-		<select id = selectCount>
-		<c:forEach var="i" begin="1" end="10">
-			<option value="${i}">${i}</option>
-		</c:forEach>
+		
+		<select id = "selectCount">
+			<c:forEach var="i" begin="1" end="10">
+				<option value="${i}">${i}</option>
+			</c:forEach>
 		</select>
 		<span>總金額：</span><span id="money">5000</span><span> 元整</span>
 		
@@ -34,13 +35,12 @@
 			<input type="hidden" name="prodID"    />
 		</form>
 		
-		<c:forEach var="prodVO" items="${modelMap.prodVOList}">
-			<input type="hidden" id="${prodVO.prodID}"
-				value="${prodVO.prodPrice}" />
+		<c:forEach var="prodVO" items="${prodVOList}">
+			<input type="hidden" id="${prodVO.prodID}" value="${prodVO.prodPrice}" />
 		</c:forEach>
 	</c:if>
-	<c:if test="${not empty modelMap.CreateOK}">
-			<h1><Font color='red'>${modelMap.CreateOK}</Font></h1>
+	<c:if test="${not empty CreateOK}">
+			<h1><Font color='red'>${CreateOK}</Font></h1>
 	</c:if>
 </body>
 <script>

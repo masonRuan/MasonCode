@@ -11,7 +11,12 @@
 <body>
 <jsp:include page="/_00_include/top.jsp" />
 <div>
-		<c:if test="${not empty modelMap.ordVOList}">
+<%-- <c:if test="${not empty ordVOList}"> --%>
+<%-- <c:set var="modelMap" value="${ordVOList}"/> --%>
+<%-- </c:if> --%>
+
+
+		<c:if test="${not empty ordVOList}">
 			<table>
 				<thead>
 					<tr>
@@ -22,7 +27,7 @@
 						<th>總金額</th>
 					</tr>
 				</thead>
-				<c:forEach var="ordVO" items="${modelMap.ordVOList}">
+				<c:forEach var="ordVO" items="${ordVOList}">
 				<form name="Delete_Orders"
 					action="<%=request.getContextPath()%>/deleteOrd.do" method="post" id="form${ordVO.ordID}">
 					<tr>
@@ -38,10 +43,10 @@
 				</c:forEach>
 			</table>
 		</c:if>
-		<c:if test="${not empty modelMap.DeleteOK}">
-			<h1><Font color='red'>${modelMap.DeleteOK}</Font></h1> 
+		<c:if test="${not empty DeleteOK}">
+			<h1><Font color='red'>${DeleteOK}</Font></h1> 
 		</c:if>
-		<c:if test="${empty modelMap.ordVOList}">
+		<c:if test="${empty ordVOList}">
 			<h1><Font color='red'>沒有訂單資料</Font></h1>
 		</c:if>
 	</div>

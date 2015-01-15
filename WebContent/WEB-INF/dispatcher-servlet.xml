@@ -20,7 +20,7 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	 
-
+<!--  JPA Entity Manager Settings -->
 
 </beans>
 	

@@ -11,7 +11,7 @@
 <jsp:include page="/_00_include/top.jsp" />
 	
 	
-	<c:if test="${not empty modelMap.prodVOList}">
+	<c:if test="${not empty prodVOList}">
 	<table>
 		<thead>
 			<tr>
@@ -20,7 +20,7 @@
 				<th>商品單價</th>
 			</tr>
 		</thead>
-		<c:forEach var="prodVO" items="${modelMap.prodVOList}">
+		<c:forEach var="prodVO" items="${prodVOList}">
 		<form name="createOrders"
 			action="<%=request.getContextPath()%>/updateProd.do" method="post">
 			<tr>
@@ -35,19 +35,19 @@
 		</c:forEach>
 		</table>
 	</c:if>
-	<c:if test="${empty modelMap.prodVOList}">
+	<c:if test="${empty prodVOList}">
 	<h1>沒有商品資料</h1>
 	</c:if>
 	
 	
-	<c:if test="${not empty modelMap.CreateOK}">
-			<h1><Font color='red'>${modelMap.CreateOK}</Font></h1>
+	<c:if test="${not empty CreateOK}">
+			<h1><Font color='red'>${CreateOK}</Font></h1>
 	</c:if>
-	<c:if test="${not empty modelMap.prodNameErr}">
-	<h1><Font color='red'>${modelMap.prodNameErr}</Font></h1><br>
+	<c:if test="${not empty prodNameErr}">
+	<h1><Font color='red'>${prodNameErr}</Font></h1><br>
 	</c:if>
-	<c:if test="${not empty modelMap.prodPriceErr}">
-	<h1><Font color='red'>${modelMap.prodPriceErr} </Font></h1>
+	<c:if test="${not empty prodPriceErr}">
+	<h1><Font color='red'>${prodPriceErr} </Font></h1>
 	</c:if>
 </body>
 </html>

@@ -1,21 +1,16 @@
 package com.orders.model;
 
-import java.util.ArrayList;
+
 import java.util.List;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
-
-import com.hibernate.util.HibernateUtil;
-
 
 
 
 public class OrdersHibernateDAO implements OrdersDAOInterface {
 
 	private static final String GET_ALL_STMT = "from OrdersVO order by ORD_ID";
-
+	@Autowired
 	private HibernateTemplate hibernateTemplate;    
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) { 
         this.hibernateTemplate = hibernateTemplate;

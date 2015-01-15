@@ -3,13 +3,19 @@ package com.orders.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.products.model.ProductsVO;
 
+@Service
+@Transactional
 public class OrdersService {
 	
+	@Autowired
 	private OrdersDAOInterface dao;
 
 	public OrdersService() {

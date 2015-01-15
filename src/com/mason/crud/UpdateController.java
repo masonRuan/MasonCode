@@ -1,10 +1,5 @@
 package com.mason.crud;
 
-import java.util.HashMap;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,51 +11,48 @@ import com.products.model.ProductsService;
 
 /** 
  * UpdateController 處理  Update Products 的所有功能
- * 				
- * 					
+ * 								
  */
 
 @Controller
 public class UpdateController {
 	private String viewPage;
-	private HashMap<String, Object> model = null;
 	
 	@RequestMapping(value = "/updateProdShow.do", method = RequestMethod.POST)
-	public ModelAndView updateProductsShow(HttpServletRequest request,
-			HttpServletResponse response) throws Exception
+	public ModelAndView updateProductsShow(ModelAndView mav) throws Exception
 
 	{
 		viewPage = "_03_Update/UpdateProducts";
-		model = new HashMap<String, Object>();
-		model.put("prodVOList", LoadData.getProdList());
-		return new ModelAndView(viewPage, "modelMap", model);
+		mav.setViewName(viewPage);
+		mav.addObject("prodVOList", LoadData.getProdList());
+		return mav;
 	}
 
 	@RequestMapping(value = "/updateProd.do", method = RequestMethod.POST)
-	public ModelAndView updateProducts(@RequestParam String prodName , String prodPrice , Integer prodID) throws Exception
+	public ModelAndView updateProducts(@RequestParam String prodName , String prodPrice , Integer prodID , ModelAndView mav) throws Exception
 
 	{
 		viewPage = "_03_Update/UpdateProducts";
-		model = new HashMap<String, Object>();
 		ProductsService prodServ = new ProductsService();
+		Integer prodStatus = 1;     	/* 1代表尚未刪除 */
 		Integer prodPriceInt = null;
-		Integer prodStatus = 1;     /* 1代表尚未刪除 */
-		// 驗證
-		if (prodName.trim().length() == 0) {
-			model.put("prodNameErr", "名稱不能為空");
-		}
+		/* 驗證修改後的商品資料是否符合企業邏輯 */
 		try {
+			if (prodName.trim().length() == 0) {
+				mav.addObject("prodNameErr", "名稱不能為空");
+			}
 			prodPriceInt = Integer.parseInt(prodPrice);
 		} catch (NumberFormatException e) {
-			model.put("prodPriceErr", "價格應為整數");
+			mav.addObject("prodPriceErr", "價格應為整數");
 		}
-		if (model.isEmpty()) {
-			
+		
+		if (mav.isEmpty()) {
 			prodServ.updateProducts(prodID, prodName, prodPriceInt, prodStatus);
-			model.put("CreateOK", "商品修改成功");
+			mav.addObject("CreateOK", "商品修改成功");
 		}
-		model.put("prodVOList", prodServ.readProducts());
-		return new ModelAndView(viewPage, "modelMap", model);
+		mav.setViewName(viewPage);
+		mav.addObject("prodVOList", prodServ.readProducts());
+		return mav;
 	}
 	
 }

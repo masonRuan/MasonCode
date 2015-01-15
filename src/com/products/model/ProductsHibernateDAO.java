@@ -1,13 +1,9 @@
 package com.products.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+import java.util.List;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import com.hibernate.util.HibernateUtil;
 
 
 
