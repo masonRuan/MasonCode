@@ -7,7 +7,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 
 
-public class ProductsHibernateDAO implements ProductsDAOInterface {
+public class ProductsDAOHibernateImpl implements ProductsDAO {
 
 	private static final String GET_ALL_STMT = "from ProductsVO Where PROD_STATUS = 1 order by PROD_ID";
 	

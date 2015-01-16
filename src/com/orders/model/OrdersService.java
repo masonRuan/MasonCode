@@ -16,11 +16,11 @@ import com.products.model.ProductsVO;
 public class OrdersService {
 	
 	@Autowired
-	private OrdersDAOInterface dao;
+	private OrdersDAO dao;
 
 	public OrdersService() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("model-config1-DriverManagerDataSource.xml");
-		dao =(OrdersDAOInterface) context.getBean("ordDAO");
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		dao =(OrdersDAO) context.getBean("ordDAO");
 	}
 	
 	public List<OrdersVO> readOrders(){

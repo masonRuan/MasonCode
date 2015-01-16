@@ -15,11 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductsService {
 	
 	@Autowired
-	private ProductsDAOInterface dao;
+	private ProductsDAO dao;
 
 	public ProductsService() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("model-config1-DriverManagerDataSource.xml");
-		dao =(ProductsDAOInterface) context.getBean("prodDAO");
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		dao =(ProductsDAO) context.getBean("prodDAO");
 	}
 	
 	public List<ProductsVO> readProducts() {

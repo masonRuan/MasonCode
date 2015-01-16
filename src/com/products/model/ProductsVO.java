@@ -2,14 +2,44 @@ package com.products.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MapKey;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.orders.model.OrdersVO;
 
+@Entity
+@Table(name = "PRODUCTS")
 public class ProductsVO {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PRODUCTS_PROD_ID_SEQ")
+	@Column(name = "PROD_ID")
 	private Integer prodID;
+	
+	@Column(name = "PROD_NAME")
 	private String prodName;
+	
+	@Column(name = "PROD_PRICE")
 	private Integer prodPrice;
+	
+	@Column(name = "PROD_STATUS")
 	private Integer prodStatus;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "item", cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SELECT) 
+	@MapKey(name = "PROD_ID")
 	private Set<OrdersVO> ords = new HashSet<OrdersVO>();
 	
 	public Integer getProdID() {

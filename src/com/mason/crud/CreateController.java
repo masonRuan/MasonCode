@@ -1,11 +1,13 @@
 package com.mason.crud;
 
+
 import java.sql.Timestamp;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.mason.util.LoadData;
 import com.orders.model.OrdersService;
 import com.products.model.ProductsService;
@@ -16,7 +18,7 @@ import com.products.model.ProductsService;
  */
 
 @Controller
-public class CreateController {
+public class CreateController{
 	private String viewPage;
 
 	@RequestMapping(value = "/createOrdShow.do", method = RequestMethod.POST)
@@ -76,5 +78,4 @@ public class CreateController {
 		mav.setViewName(viewPage);
 		return mav;
 	}
-
 }

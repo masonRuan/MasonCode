@@ -11,6 +11,21 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 http://www.springframework.org/schema/aop
 http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
   
+  
+  
+<!--       <bean id="entityManagerFactory" -->
+<!--         class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean"> -->
+<!--         <property name="persistenceUnitName" value="testerPU" /> -->
+<!--     </bean> -->
+<!--     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"> -->
+<!--         <property name="entityManagerFactory" ref="entityManagerFactory" /> -->
+<!--     </bean> -->
+<!--     <tx:annotation-driven transaction-manager="transactionManager" /> -->
+  
+  
+  
+   <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+  
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
         <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/> 
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:testdb"/> 
@@ -18,13 +33,15 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         <property name="password" value="sa123456"/> 
     </bean> 
     
-<!--     destroy-method="destroy" -->
+
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" destroy-method="destroy"> 
         <property name="dataSource" ref="dataSource"/> 
         <property name="mappingResources"> 
             <list> 
-                <value>com/orders/model/orders.hbm.xml</value> 
+            	<value>com/orders/model/orders.hbm.xml</value> 
                 <value>com/products/model/products.hbm.xml</value> 
+<!--                 <value>com/orders/model/orders.hbm.xml</value>  -->
+<!--                 <value>com/products/model/products.hbm.xml</value>  -->
             </list> 
         </property> 
         <property name="hibernateProperties"> 
@@ -41,12 +58,12 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
         <property name="sessionFactory" ref="sessionFactory"/> 
     </bean>    
-         
-    <bean id="ordDAO" class="com.orders.model.OrdersHibernateDAO">
+       						 
+    <bean id="ordDAO" class="com.orders.model.OrdersDAOHibernateImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/> 
     </bean>
 
-    <bean id="prodDAO" class="com.products.model.ProductsHibernateDAO">
+    <bean id="prodDAO" class="com.products.model.ProductsDAOHibernateImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"/> 
     </bean>
 
@@ -67,12 +84,12 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
     </tx:advice>
   
     <aop:config>
-        <aop:pointcut id="ordDAOPointcut" expression="execution(* com.orders.model.OrdersDAOInterface.*(..))"/>
+        <aop:pointcut id="ordDAOPointcut" expression="execution(* com.orders.model.OrdersDAO.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="ordDAOPointcut"/>
     </aop:config>
     
     <aop:config>
-        <aop:pointcut id="prodDAOPointcut" expression="execution(* com.products.model.ProductsDAOInterface.*(..))"/>
+        <aop:pointcut id="prodDAOPointcut" expression="execution(* com.products.model.ProductsDAO.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="prodDAOPointcut"/>
     </aop:config>
 </beans>

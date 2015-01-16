@@ -2,7 +2,7 @@ package com.products.model;
 
 import java.util.List;
 
-public interface ProductsDAOInterface {
+public interface ProductsDAO {
 	 public List<ProductsVO> readProducts();
 	 public void createProducts(ProductsVO productsVO);
 	 public void updateProducts(ProductsVO productsVO);
