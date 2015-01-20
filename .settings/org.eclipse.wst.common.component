@@ -3,5 +3,7 @@
 		<property name="context-root" value="MasonCode"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src"/>
 		<wb-resource deploy-path="/" source-path="WebContent"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
 	</wb-module>
 </project-modules>

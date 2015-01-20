@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!--共用設定變數 -->
+<!--     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+<!--         <property name="locations"> -->
+<!--             <list> -->
+<!--                 <value>classpath:system-config.properties</value> -->
+<!--             </list> -->
+<!--         </property> -->
+<!--     </bean> -->
+
+    <context:component-scan base-package="com.micb2b.core.base" use-default-filters="false">
+        <context:include-filter type="aspectj" expression="com.micb2b.core.base.*"/>
+                                
+    </context:component-scan>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<!--     	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/> -->
+    	<property name="prefix" value="/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+    <!--Aspect-->
+<!--     <aop:aspectj-autoproxy> -->
+<!--         <aop:include name="fmsLogAspect"/> -->
+<!--     </aop:aspectj-autoproxy> -->
+
+    <!--data source-->
+    <import resource="spring-dataSource.xml"/>
+
+    <!--hibernate-->
+    <import resource="spring-hibernate.xml"/>
+    
+<!--     <import resource="spring-security.xml"/> -->
+    
+<!--     <import resource="classpath:_modules/**/*core.xml"/> -->
+
+</beans>
