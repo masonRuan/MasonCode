@@ -1,5 +1,6 @@
 package com.micb2b.core.base.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,18 +21,21 @@ import com.micb2b.core.base.service.impl.ProductsServiceImpl;
 public class DeleteController {
 	private String viewPage;
 
+	@Autowired
+	private IOrdersService orderServ ;
+	@Autowired
+	private IProductsService prodServ ;
+	
 	@RequestMapping(value = "/deleteOrd.do", method = RequestMethod.POST)
 	public ModelAndView deleteOrders(@RequestParam Integer ordID,
 			ModelAndView mav) throws Exception
 
 	{
 		viewPage = "_01_Read/ReadOrders";
-		OrdersServiceImpl ordServ = new OrdersServiceImpl();
-		ordServ.deleteOrders(ordID);
-		
+		orderServ.deleteOrders(ordID);
 		mav.setViewName(viewPage);
 		mav.addObject("DeleteOK", "訂單刪除成功");
-		mav.addObject("ordVOList", ordServ.readOrders());
+		mav.addObject("ordVOList", orderServ.readOrders());
 		return mav;
 	}
 
@@ -43,9 +47,7 @@ public class DeleteController {
 	{
 		viewPage = "_01_Read/ReadProducts";
 		Integer prodStatus = 0;    /* 0代表已刪除 */
-		ProductsServiceImpl prodServ = new ProductsServiceImpl();
 		prodServ.deleteProducts(prodID, prodName, prodPrice, prodStatus);
-		
 		mav.setViewName(viewPage);
 		mav.addObject("DeleteOK", "商品刪除成功");
 		mav.addObject("prodVOList", prodServ.readProducts());

@@ -16,19 +16,7 @@
           destroy-method="destroy">
         <property name="dataSource" ref="dataSource"/>
                 
-        <property name="packagesToScan">
-			<list>
-<!-- 				<value>com.micb2b.core.base.vo.Orders</value> -->
-				<value>com.micb2b.core.base.vo</value>
-			</list>
-		</property>
-		
-		<property name="annotatedClasses">
-			<list>
-				<value>com.micb2b.core.base.vo.Products</value>
-				<value>com.micb2b.core.base.vo.Orders</value>
-			</list>
-		</property>
+<!-- 		<property name="packagesToScan" value="com.micb2b.core.base"/> -->
         
         
         <property name="hibernateProperties">
@@ -36,7 +24,7 @@
                 <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
 
                 <!--Log -->
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
 
                 <!--Cache -->
                 <prop key="hibernate.cache.use_query_cache">false</prop>
@@ -63,7 +51,7 @@
             <tx:method name="create*" rollback-for="Exception" propagation="REQUIRED"/>
             <tx:method name="read*" read-only="true" />
             <tx:method name="update*" rollback-for="Exception" propagation="REQUIRED"/>
-            <tx:method name="delete*" rollback-for="Exception" />
+            <tx:method name="delete*" rollback-for="Exception" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 

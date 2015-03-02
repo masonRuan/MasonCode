@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.micb2b.core.base.dao.IOrdersDao;
 import com.micb2b.core.base.service.IOrdersService;
-import com.micb2b.core.base.service.util.GetApplicationContext;
 import com.micb2b.core.base.vo.Orders;
 import com.micb2b.core.base.vo.Products;
 
@@ -20,17 +19,18 @@ public class OrdersServiceImpl implements IOrdersService{
 	@Autowired
 	private IOrdersDao dao;
 
-	public OrdersServiceImpl() {
-		dao =(IOrdersDao) GetApplicationContext.getContext().getBean("ordDAO");
-	}
 	@Override
 	public List<Orders> readOrders(){
 		return dao.readOrders();
 	}
 	@Override
-	public void createOrders(Integer ordTotal,Integer ordCount,Integer prodID , Timestamp ordTime){
+	public void createOrders(Integer ordTotal,Integer ordCount,Integer prodID , Timestamp ordTime,String prodName,
+			Integer prodPrice){
 		Products productsVO = new Products();
 		productsVO.setProdID(prodID);
+		productsVO.setProdName(prodName);
+		productsVO.setProdPrice(prodPrice);
+		productsVO.setProdStatus(1);
 		Orders ordersVO = new Orders();
 		ordersVO.setOrdCount(ordCount);
 		ordersVO.setOrdTotal(ordTotal);

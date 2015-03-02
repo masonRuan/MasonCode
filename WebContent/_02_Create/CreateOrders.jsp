@@ -33,6 +33,9 @@
 			<input type="hidden" name="ordTotal"  />
 			<input type="hidden" name="ordCount"  />
 			<input type="hidden" name="prodID"    />
+			
+			<input type="hidden" name="prodName"    />
+			<input type="hidden" name="prodPrice"    />
 		</form>
 		
 		<c:forEach var="prodVO" items="${prodVOList}">
@@ -45,12 +48,12 @@
 </body>
 <script>
 $(document).ready(function () {
-	var prodID,ordCount,prodPrice,ordTotal;
+	var prodID ,ordCount ,prodPrice ,ordTotal ,prodName ,prodPrice;
 	
 	saveData();
 	
 	$("#selectProd").change(function (){
-		saveData(prodID,ordCount,ordTotal);
+		saveData();
 	});
 	
 	$("#selectCount").change(function (){
@@ -59,6 +62,7 @@ $(document).ready(function () {
 });
 
 function saveData (){
+	prodName = $("#selectProd option:selected").text();
 	prodID = $("#selectProd").val();
 	ordCount = $("#selectCount").val();
 	prodPrice = $("#"+prodID+"").val();
@@ -67,6 +71,8 @@ function saveData (){
 	$("input[name='prodID']").val(prodID);
 	$("input[name='ordTotal']").val(ordTotal);
 	$("input[name='ordCount']").val(ordCount);
+	$("input[name='prodPrice']").val(prodPrice);
+	$("input[name='prodName']").val(prodName);
 }
 </script>
 </html>

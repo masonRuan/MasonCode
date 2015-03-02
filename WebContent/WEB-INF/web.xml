@@ -4,12 +4,12 @@
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
-<!--   <display-name>Spring MVC Application From Mason</display-name> -->
+  <display-name>Spring MVC Application From Mason</display-name>
   
-<!--   	<context-param> -->
-<!-- 		<param-name>contextConfigLocation</param-name> -->
-<!-- 		<param-value>classpath:spring-config-test.xml</param-value> -->
-<!-- 	</context-param> -->
+  	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring-config-test.xml</param-value>
+	</context-param>
   
  	<servlet>
 		<servlet-name>dispatcherServlet</servlet-name>
@@ -18,27 +18,18 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:spring-config-test.xml</param-value>
 		</init-param>
-<!-- 		<init-param> -->
-<!-- 			<param-name>contextInitializerClasses</param-name> -->
-<!-- 			<param-value>com.micb2b.core.base.utils.SpringBeanUtils</param-value> -->
-<!-- 		</init-param> -->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
 	<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
   
-  <!-- Spring Listener --> 
-<!--   <listener>   -->
-<!--         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>   -->
-<!--   </listener>   -->
-<!--   <context-param>   -->
-<!--       <param-name>contextConfigLocation</param-name>   -->
-<!--       <param-value>/WEB-INF/classes/applicationContext*.xml</param-value>   -->
-<!--   </context-param>   -->
-  
+	 <!-- Spring Listener -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
   <!-- ISO8859-1 轉 UTF-8過濾器 -->  
   <filter>  
     <filter-name>encodingFilter</filter-name>  

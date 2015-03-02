@@ -1,14 +1,14 @@
 package com.micb2b.core.base.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.micb2b.core.base.service.IOrdersService;
 import com.micb2b.core.base.service.IProductsService;
-import com.micb2b.core.base.service.impl.ProductsServiceImpl;
-import com.micb2b.core.base.utils.LoadData;
+
 
 /** 
  * UpdateController 處理  Update Products 的所有功能
@@ -19,13 +19,18 @@ import com.micb2b.core.base.utils.LoadData;
 public class UpdateController {
 	private String viewPage;
 	
+	@Autowired
+	private IOrdersService orderServ ;
+	@Autowired
+	private IProductsService prodServ ;
+	
 	@RequestMapping(value = "/updateProdShow.do", method = RequestMethod.POST)
 	public ModelAndView updateProductsShow(ModelAndView mav) throws Exception
 
 	{
 		viewPage = "_03_Update/UpdateProducts";
 		mav.setViewName(viewPage);
-		mav.addObject("prodVOList", LoadData.getProdList());
+		mav.addObject("prodVOList", prodServ.readProducts());
 		return mav;
 	}
 
@@ -34,7 +39,6 @@ public class UpdateController {
 
 	{
 		viewPage = "_03_Update/UpdateProducts";
-		ProductsServiceImpl prodServ = new ProductsServiceImpl();
 		Integer prodStatus = 1;     	/* 1代表尚未刪除 */
 		Integer prodPriceInt = null;
 		/* 驗證修改後的商品資料是否符合企業邏輯 */

@@ -5,20 +5,33 @@ import java.sql.Timestamp;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
+
 @Entity
-@Table(name = "ORDERS")
-public class Orders {
+@Table(name = "ORDERS", schema = "SYSTEM")
+public class Orders implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+//	, generator = "ORDERS_ORD_ID_seq"
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ORDERS_ORD_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE ,generator="ord_seq")
+	@SequenceGenerator(
+			name="ord_seq",
+			sequenceName="ORDERS_ORD_ID_seq",
+			allocationSize=1
+		)
 	@Column(name = "ORD_ID")
 	private Integer ordID;
 	
@@ -31,8 +44,8 @@ public class Orders {
 	@Column(name = "ORD_COUNT")
 	private Integer ordCount;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "PROD_ID", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "PROD_ID")
 	private Products productsVO;
 	
 	public Integer getOrdID() {
